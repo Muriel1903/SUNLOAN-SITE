@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - SUN LOAN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><img src="assets/images/logo.png" alt="SUN LOAN"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="apply.html"><i class="fas fa-hand-holding-usd"></i> Demander un prêt</a></li>
+                    <li><a href="myloans.html"><i class="fas fa-file-invoice-dollar"></i> Mes prêts</a></li>
+                    <li><a href="profile.html"><i class="fas fa-user"></i> Mon profil</a></li>
+                    <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
+                    <li><a href="register.html"><i class="fas fa-user-plus"></i> Inscription</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Obtenez le prêt dont vous avez besoin en toute confiance</h1>
+                <p>SUN LOAN vous propose des solutions de financement adaptées à vos besoins avec des taux compétitifs.</p>
+                <div class="hero-buttons" style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+                    <a href="register.html" class="btn">S'inscrire</a>
+                    <a href="login.html" class="btn btn-outline">Se connecter</a>
+                    <a href="apply.html" class="btn">Demander un prêt</a>
+                </div>
+            </div>
+        </section>
+        <section class="features">
+            <div class="feature-card">
+                <i class="fas fa-bolt"></i>
+                <h3>Rapide</h3>
+                <p>Réponse sous 24h pour votre demande de prêt.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-percent"></i>
+                <h3>Taux avantageux</h3>
+                <p>Des taux d'intérêt compétitifs adaptés à votre profil.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Sécurisé</h3>
+                <p>Vos données sont protégées et sécurisées.</p>
+            </div>
+        </section>
+        <section class="loan-calculator">
+            <h2>Simulateur de prêt</h2>
+            <form id="loan-calculator-form">
+                <div class="form-group">
+                    <label for="amount">Montant du prêt (FCFA)</label>
+                    <input type="number" id="amount" class="form-control" min="500" max="5000000" required>
+                </div>
+                <div class="form-group">
+                    <label for="duration">Durée (mois)</label>
+                    <input type="number" id="duration" class="form-control" min="2" max="60" required>
+                </div>
+                <button type="submit" class="btn">Calculer</button>
+            </form>
+            <div id="calculator-result" class="calculator-result" style="display: none;">
+                <h3>Résultat de la simulation</h3>
+                <p><strong>Mensualité:</strong> <span id="monthly-payment"></span></p>
+                <p><strong>Montant total à rembourser:</strong> <span id="total-amount"></span></p>
+                <p><strong>Taux d'intérêt:</strong> <span id="interest-rate"></span></p>
+                <p><strong>Pénalité en cas de retard (1% / jour):</strong> <span id="late-penalty"></span></p>
+            </div>
+        </section>
+    </main>
+    <script>
+    // Gestion de la simulation côté client
+    document.getElementById('loan-calculator-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        let amount = parseFloat(document.getElementById('amount').value);
+        let duration = parseInt(document.getElementById('duration').value);
+        if (amount > 500000) {
+            duration = 3;
+            document.getElementById('duration').value = 3;
+            alert("Pour un prêt supérieur à 500 000 FCFA, la durée est automatiquement fixée à 3 mois . pour un montant inferieur a 1000000 FCFA, la durée est de 1 mois. ");
+        }
+        let interestRate = 0.1;
+        let totalAmount = amount + (amount * interestRate);
+        let monthlyPayment = totalAmount / duration;
+        let daysLate = 1;
+        let latePenalty = (amount * 0.1) * daysLate;
+        document.getElementById('monthly-payment').textContent = monthlyPayment.toFixed(2) + " FCFA";
+        document.getElementById('total-amount').textContent = totalAmount.toFixed(2) + " FCFA";
+        document.getElementById('interest-rate').textContent = (interestRate * 100) + " %";
+        document.getElementById('late-penalty').textContent = latePenalty.toFixed(2) + " FCFA / jour";
+        document.getElementById('calculator-result').style.display = 'block';
+    });
+    </script>
+</body>
+</html>

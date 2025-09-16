@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demander un prêt - SUN LOAN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><img src="assets/images/logo.png" alt="SUN LOAN"></a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                    <li><a href="apply.html"><i class="fas fa-hand-holding-usd"></i> Demander un prêt</a></li>
+                    <li><a href="myloans.html"><i class="fas fa-file-invoice-dollar"></i> Mes prêts</a></li>
+                    <li><a href="profile.html"><i class="fas fa-user"></i> Mon profil</a></li>
+                    <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
+                    <li><a href="register.html"><i class="fas fa-user-plus"></i> Inscription</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container">
+        <h1>Demander un prêt</h1>
+        <form id="apply-form">
+            <div class="form-group">
+                <label for="amount">Montant demandé (FCFA)</label>
+                <input type="number" id="amount" name="amount" min="500" max="5000000" required>
+            </div>
+            <div class="form-group">
+                <label for="duration">Durée (mois)</label>
+                <input type="number" id="duration" name="duration" min="2" max="60" required>
+            </div>
+            <div class="form-group">
+                <label for="motif">Motif du prêt</label>
+                <input type="text" id="motif" name="motif" required>
+            </div>
+            <button type="submit" class="btn">Envoyer la demande</button>
+        </form>
+        <div id="apply-result" style="display:none; margin-top:20px;"></div>
+    </main>
+    <script>
+    document.getElementById('apply-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        document.getElementById('apply-result').style.display = 'block';
+        document.getElementById('apply-result').innerHTML = '<div class="alert alert-success">Votre demande a été envoyée (simulation côté client).</div>';
+    });
+    </script>
+</body>
+</html>
